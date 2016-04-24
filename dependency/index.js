@@ -1,9 +1,16 @@
-function getEnvironment() {
+var deepmerge = require('deepmerge');
+
+function getEnvironmentDependencies() {
+  var environment = process.env.NODE_ENV;
   if (typeof process.env.NODE_ENV === 'undefined') {
-    return 'development';
+    environment = 'development';
   }
 
-  return process.env.NODE_ENV;
+  try {
+    return require('./' + environment);
+  } catch (e) {
+    return {};
+  }
 }
 
-module.exports = require('./' + getEnvironment());
+module.exports = deepmerge(require('./default'), getEnvironmentDependencies());

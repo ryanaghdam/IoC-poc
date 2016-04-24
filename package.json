@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "deepmerge": "^0.2.10"
+  }
+}
